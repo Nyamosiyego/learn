@@ -1,42 +1,39 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
 import connectMongo from "@/database/conn";
 import Users from "@/model/Schema";
 import { compare } from "bcryptjs";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import clientPromise from "@/lib/mongodb";
+import EmailProvider from "next-auth/providers/email";
 
 export default NextAuth({
   providers: [
-    // OAuth authentication providers...
+    // Google Provider
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
     GitHubProvider({
-    clientId: process.env.GITHUB_ID,
-    clientSecret: process.env.GITHUB_SECRET
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
     }),
-    CredentialsProvider({
-      name: "Credentials",
-      async authorize(credentials, req) {
-        connectMongo().catch((error) =>
-          res.json({ error: "Connection failed....!" })
-        );
-        //check if user already exists
-        const result = await Users.findOne({ email: credentials.email });
-        if (!result) {
-        throw new Error("No user found!");
-        }
-        // compare password
-        const isValid = await compare(credentials.password, result.password);
-        //incorrect password
-        if (!isValid || result.email !== credentials.email) {
-          throw new Error("Username or password is incorrect");
-        }
-        return result;
-      }
-    })
+    EmailProvider({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM,
+    }),
+
+
   ],
-  secret: 'pg1QncceF5iCCnFn50lve81tqhjQS8vS2nRnCg+tsI0=',
+  pages: {
+
+    error: '/signin', // Error code passed in query string as ?error=
+  },
+  allowDangerousEmailAccountLinking: true,
+  adapter: MongoDBAdapter(clientPromise),
+  secret: "XH6bp/TkLvnUkQiPDEZNyHc0CV+VV5RL/n+HdVHoHN0=",
+  session: {
+    strategy: "jwt",
+  },
 });

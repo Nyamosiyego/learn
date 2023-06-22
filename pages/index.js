@@ -43,7 +43,6 @@ function User({ session, handleSignOut }){
       <h3 className="text-4xl font-bold">Authorised User Homepage</h3>
       <div className="details">
         <h5>{session.user.name}</h5>
-        <h5>{session.user.username}</h5>
         <h5>{session.user.email}</h5>
       </div>
 
