@@ -23,16 +23,13 @@ export default NextAuth({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
     }),
-
-
   ],
   pages: {
-
-    error: '/signin', // Error code passed in query string as ?error=
+    error: "/signin", // Error code passed in query string as ?error=
   },
   allowDangerousEmailAccountLinking: true,
   adapter: MongoDBAdapter(clientPromise),
-  secret: "XH6bp/TkLvnUkQiPDEZNyHc0CV+VV5RL/n+HdVHoHN0=",
+  secret: process.env.SECRET,
   session: {
     strategy: "jwt",
   },
