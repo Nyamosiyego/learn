@@ -10,6 +10,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "@/lib/validate";
 import { useRouter } from "next/router";
+import { csrfToken } from "next-auth/react";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -55,50 +56,21 @@ const Login = () => {
           </p>
         </div>
         {/* form */}
-        <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-          <div className={styles.input_group}>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className={styles.input_text}
-              {...formik.getFieldProps("email")}
-            />
-            <span className="icon flex items-center px-4">
-              <HiAtSymbol size={25} />
-            </span>
-          </div>
-          {formik.errors.email && formik.touched.email ? (
-            <span className="text-rose-500">{formik.errors.email}</span>
-          ) : (
-            <></>
-          )}
-          <div className={styles.input_group}>
-            <input
-              type={show ? "text" : "password"}
-              name="password"
-              placeholder="password"
-              className={styles.input_text}
-              {...formik.getFieldProps("password")}
-            />
-            <span
-              className="icon flex items-center px-4"
-              onClick={() => setShow(!show)}
-            >
-              <HiFingerPrint size={25} />
-            </span>
-          </div>
-          {formik.errors.password && formik.touched.password ? (
-            <span className="text-rose-500">{formik.errors.password}</span>
-          ) : (
-            <></>
-          )}
-          {/* login buttons */}
-          <div className="input-button">
+        <form
+          className="flex flex-col gap-4 mt-8"
+          onSubmit={formik.handleSubmit}
+        >
+          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+          <Link href={"api/auth/signin"}>
             <button type="submit" className={styles.button}>
-              Login
+              Sign in with Email
             </button>
+          </Link>
+          <div>
+            <p className="text-gray-800 text-2xl font-bold">or</p>
           </div>
+
+          {/* login buttons */}
           <div className="input-button">
             <button
               type="button"
@@ -131,14 +103,7 @@ const Login = () => {
           </div>
         </form>
         {/* bottom */}
-        <div className="bottom">
-          <p className="text-center text-gray-400">
-            Dont have an account?
-            <Link legacyBehavior href={"/register"}>
-              <a className="text-blue-700">Sign Up</a>
-            </Link>
-          </p>
-        </div>
+      
       </section>
     </Layout>
   );
