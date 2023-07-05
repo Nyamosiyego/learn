@@ -10,23 +10,31 @@ export default async function handler(req, res) {
   }
 
   if (method === "POST") {
-    const { name, parent } = req.body;
-    const CategoryDoc = await Category.create({ name, parent });
-    res.status(200).json(CategoryDoc);
-  }
-  if (method === "PUT") {
-    const { name, parent, _id } = req.body;
-    const CategoryDoc = await Category.findByIdAndUpdate(
-      _id,
-      { name, parent },
-      { new: true }
-    );
-    res.status(200).json(CategoryDoc);
+    const { name, parentCategory, properties } = req.body;
+    const categoryDoc = await Category.create({
+      name,
+      parent: parentCategory || undefined,
+      properties,
+    });
+    res.json(categoryDoc);
   }
 
-  if (method === 'DELETE') {
+  if (method === "PUT") {
+    const { name, parentCategory, properties, _id } = req.body;
+    const categoryDoc = await Category.updateOne(
+      { _id },
+      {
+        name,
+        parent: parentCategory || undefined,
+        properties,
+      }
+    );
+    res.json(categoryDoc);
+  }
+
+  if (method === "DELETE") {
     const { _id } = req.query;
     await Category.findByIdAndDelete(_id);
-    res.status(200).json({ message: 'Category deleted' });
+    res.status(200).json({ message: "Category deleted" });
   }
 }
