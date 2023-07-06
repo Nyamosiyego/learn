@@ -13,7 +13,9 @@ export default function ProductForm({
   images: existingImages,
   category: assignedCategory,
   properties: assignedProperties,
+
 }) {
+  
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
   const [category, setCategory] = useState(assignedCategory || "");
@@ -25,11 +27,14 @@ export default function ProductForm({
   const [goToProducts, setGoToProducts] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [categories, setCategories] = useState([]);
+ 
+  
+  
   const router = useRouter();
   useEffect(() => {
     axios.get("/api/categories").then((result) => {
       setCategories(result.data);
-    });
+    })
   }, []);
   async function saveProduct(ev) {
     ev.preventDefault();
@@ -40,6 +45,7 @@ export default function ProductForm({
       images,
       category,
       properties: productProperties,
+     
     };
     if (_id) {
       //update
@@ -96,7 +102,6 @@ export default function ProductForm({
       catInfo = parentCat;
     }
   }
-  
 
   return (
     <form onSubmit={saveProduct}>
@@ -109,7 +114,7 @@ export default function ProductForm({
       />
       <label>Category</label>
       <select value={category} onChange={(ev) => setCategory(ev.target.value)}>
-        <option value="">Uncategorized</option>
+        <option value="">No category</option>
         {categories.length > 0 &&
           categories.map((c) => (
             <option key={c._id} value={c._id}>
@@ -196,5 +201,3 @@ export default function ProductForm({
     </form>
   );
 }
-
-

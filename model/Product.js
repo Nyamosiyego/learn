@@ -1,5 +1,6 @@
 import mongoose, { models } from 'mongoose';
 const { Schema, model } = mongoose;
+import Users from './Schema';
 
 const ProductSchema = new Schema({
     title: {
@@ -16,7 +17,13 @@ const ProductSchema = new Schema({
         required: true
     },
     images: [{type:String}],
-    properties: {type: Object}
+    properties: {type: Object},
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "user"
+    },
 }, { timestamps: true })
+
+
 
 export const Product = models.Product || model("Product", ProductSchema);
