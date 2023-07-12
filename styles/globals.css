@@ -7,60 +7,65 @@
   font-family: "Poppins", sans-serif;
 }
 
-img {
-  max-height: 100%;
-}
 
-
-input, textarea, select {
-  @apply border-2 border-gray-300 rounded-md px-4 py-1 w-full;
-  @apply mb-2;
-  @apply focus:outline-none focus:border-blue-900;
+img{
+    max-height: 100%;
 }
-
-h1 {
-  @apply text-2xl text-blue-900 mb-2;
+input, textarea, select{
+    @apply border border-gray-200 rounded-sm px-1 w-full py-2 px-3;
+    @apply mb-2;
 }
-
-label {
-  @apply text-blue-900;
+input:focus, textarea:focus, select:focus{
+    @apply border-blue-900;
 }
-
-.btn-primary {
-  @apply bg-blue-900 text-white px-4 py-2 rounded-md;
-  @apply hover:bg-blue-800;
+h1{
+    @apply text-gray-800 mb-4 text-xl;
 }
-table.basic {
-  @apply  w-full mt-5;
+h2{
+    @apply text-gray-800 mt-6 mb-2 text-lg;
 }
-table.basic thead tr td {
-  @apply bg-blue-100;
+label{
+    @apply text-gray-600 text-sm;
 }
-
+.btn-primary{
+    @apply bg-primary text-white px-4 py-1 rounded-sm shadow-sm;
+}
+table.basic{
+    @apply w-full bg-white rounded-sm shadow-md;
+}
+table.basic thead tr td,
+table.basic thead tr th
+{
+    @apply text-sm text-gray-600 uppercase border-b border-gray-200 px-4 py-2;
+}
 table.basic tr td{
-  @apply border border-blue-200 px-4 py-1;
-  
+    @apply px-4 py-1;
 }
-table.basic a {
-  @apply bg-blue-900 text-sm text-white px-2 py-1 rounded-md inline-flex gap-1;
+table.basic a{
+    @apply px-4 rounded-sm inline-flex mx-1 items-center gap-1 text-sm py-1;
+}
+.btn-default, .btn-red{
+    @apply px-4 py-1 rounded-md;
 }
 .btn-red{
-  @apply bg-red-800 text-white px-4 py-1 rounded-md;
-  @apply hover:bg-red-600;
+    @apply bg-red-200 text-red-600 px-4 py-1 rounded-sm shadow-sm;
 }
-
-.btn-green{
-  @apply bg-green-800 text-white px-4 py-1 rounded-md;
-  @apply hover:bg-green-600;
-}
-
-.btn-blue{
-  @apply bg-blue-800 text-white px-4 py-1 rounded-md;
-  @apply hover:bg-blue-600;
-}
-
 .btn-default{
-  @apply bg-gray-800 text-white px-4 py-1 rounded-md;
-  @apply hover:bg-gray-600;
+    @apply bg-white text-gray-800 px-4 py-1 rounded-sm border border-gray-200 shadow-sm;
 }
 
+.tiles-grid{
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-4;
+}
+.tile{
+    @apply bg-white shadow-md p-2 text-blue-900 text-center;
+}
+.tile-header{
+    @apply uppercase text-gray-500 font-bold text-xs text-center m-0;
+}
+.tile-number{
+    @apply text-3xl text-center mt-1 font-bold;
+}
+.tile-desc{
+    @apply text-xs text-gray-400;
+}

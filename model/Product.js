@@ -1,6 +1,6 @@
 import mongoose, { models } from 'mongoose';
 const { Schema, model } = mongoose;
-import Users from './Schema';
+
 
 const ProductSchema = new Schema({
     title: {
