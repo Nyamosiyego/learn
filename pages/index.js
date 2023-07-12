@@ -1,63 +1,65 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
-import Link from 'next/link'
-import { useState } from 'react'
-import { getSession, useSession, signOut } from "next-auth/react";
-
-const inter = Inter({ subsets: ['latin'] })
+/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
+import Layout from "./components/layout";
+import { useSession, getSession } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession();
-
-  function handleSignOut(){
-    signOut();
-  }
-
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Home Page</title>
-      </Head>
-      {session ? User({ session, handleSignOut }) : Guest()}
-    </div>
-  )
-}
-
-function Guest(){
-  return(
-    <main className="container mx-auto text-center py-20">
-      <h3 className='text-4xl font-bold'>Guest Homepage</h3>
-
-      <div className='flex justify-center'>
-        <Link legacyBehavior href={'/login'}><a className='mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50'>Sign In</a></Link>
+    <Layout>
+      <div className="flex justify-between">
+        <User />
+        <div className="flex bg-gray-300 gap-1 text-black rounded-lg overflow-hidden">
+          <img src={session?.user?.image} alt={Profile} className="w-6 h-6"/>
+        <span className="px-2">{session?.user?.name}</span>
+        </div>
       </div>
-    </main>
-  )
-}
-
-function User({ session, handleSignOut }){
-  return (
-    <main className="container mx-auto text-center py-20">
-      <h3 className="text-4xl font-bold">Authorised User Homepage</h3>
-      <div className="details">
-        <h5>{session.user.name}</h5>
-        <h5>{session.user.email}</h5>
-      </div>
-
-      <div className='flex justify-center'>
-        <button onClick={handleSignOut} className='mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50'>Sign Out</button>
-      </div>
-
-      <div className="flex justify-center">
-        <Link legacyBehavior href={"/profile"}>
-          <a className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50">
-            Go to Profile
-          </a>
-        </Link>
-      </div>
-    </main>
+    </Layout>
   );
 }
 
+const User = () => {
+  const { data: session } = useSession();
+  if (session?.user.name) {
+    return <div className="text-blue-900">Hello, <b>{session?.user?.name}</b></div>;
+  } else {
+    return <div className="text-blue-900">Hello, <b>{session?.user?.email}</b></div>;
+  }
+};
+
+const Profile = () => {
+  return (
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+        />
+      </svg>
+    </div>
+  );
+};
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}

@@ -7,3 +7,60 @@
   font-family: "Poppins", sans-serif;
 }
 
+img {
+  max-height: 100%;
+}
+
+
+input, textarea, select {
+  @apply border-2 border-gray-300 rounded-md px-4 py-1 w-full;
+  @apply mb-2;
+  @apply focus:outline-none focus:border-blue-900;
+}
+
+h1 {
+  @apply text-2xl text-blue-900 mb-2;
+}
+
+label {
+  @apply text-blue-900;
+}
+
+.btn-primary {
+  @apply bg-blue-900 text-white px-4 py-2 rounded-md;
+  @apply hover:bg-blue-800;
+}
+table.basic {
+  @apply  w-full mt-5;
+}
+table.basic thead tr td {
+  @apply bg-blue-100;
+}
+
+table.basic tr td{
+  @apply border border-blue-200 px-4 py-1;
+  
+}
+table.basic a {
+  @apply bg-blue-900 text-sm text-white px-2 py-1 rounded-md inline-flex gap-1;
+}
+.btn-red{
+  @apply bg-red-800 text-white px-4 py-1 rounded-md;
+  @apply hover:bg-red-600;
+}
+
+.btn-green{
+  @apply bg-green-800 text-white px-4 py-1 rounded-md;
+  @apply hover:bg-green-600;
+}
+
+.btn-blue{
+  @apply bg-blue-800 text-white px-4 py-1 rounded-md;
+  @apply hover:bg-blue-600;
+}
+
+.btn-default{
+  @apply bg-gray-800 text-white px-4 py-1 rounded-md;
+  @apply hover:bg-gray-600;
+}
+
