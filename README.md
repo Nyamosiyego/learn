@@ -8,7 +8,11 @@ FreshConnect is a platform where farmers can register as vendors and post their 
 
 To get started with FreshConnect, follow these steps:
 
+<<<<<<< HEAD
 1. Clone the repository to your local machine using `git clone https://github.com/Nyamosiyego/FreshConnect.git`.
+=======
+1. Clone the repository to your local machine using `git clone https://github.com/Nyamosiyego/learn.git`.
+>>>>>>> 4af6ce8d5cedc5f2e9ba543adb873b5b30748c92
 2. Navigate to the project directory and run `npm install` to install all dependencies.
 3. Create a `.env` file in the root of the project directory and add the following environment variables:
 
