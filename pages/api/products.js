@@ -1,7 +1,6 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/model/Product";
 import { getServerSession } from "next-auth";
-import { getSession } from "next-auth/react";
 import { authOptions } from "./auth/[...nextauth]";
 import user from "@/model/Schema";
 
