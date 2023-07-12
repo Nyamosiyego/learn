@@ -10,12 +10,17 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^1.0.0",
+    "@aws-sdk/client-s3": "^3.363.0",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
+    "date-fns": "^2.30.0",
     "eslint": "8.42.0",
-    "eslint-config-next": "13.4.5",
+    "eslint-config-next": "^13.4.7",
     "formik": "^2.4.2",
+    "mime-types": "^2.1.35",
     "mongodb": "^5.6.0",
+    "multiparty": "^4.2.3",
     "next": "13.4.5",
     "next-auth": "^4.22.1",
     "nodemailer": "^6.9.3",
@@ -23,9 +28,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
+    "react-sortablejs": "^6.1.4",
+    "react-spinners": "^0.13.8",
+    "react-sweetalert2": "^0.5.2",
+    "sortablejs": "^1.15.0",
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {
-    "mongoose": "^7.3.0"
+    "mongoose": "^7.3.1"
   }
 }
