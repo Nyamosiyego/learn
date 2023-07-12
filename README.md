@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # FreshConnect-Admin
 
-FreshConnect is a platform where farmers can register as vendors and post their products for sale. This is the admin side where an admin can check order, add products and manage other admins
+FreshConnect is a platform where farmers can register as vendors and post their products for sale.
 
 ## Getting Started
 
@@ -25,11 +25,4 @@ S3_ACCESS_KEY=
 S3_SECRET_ACCESS_KEY=
 S3_BUCKET=
 NEXTAUTH_URL="http://localhost:3000/"
-
-
-4. Run the project using the npm run dev then navitage to [http://localhost:3000](http://localhost:3000)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a pull request or open an issue.
 
