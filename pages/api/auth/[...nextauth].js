@@ -5,6 +5,7 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb";
 import EmailProvider from "next-auth/providers/email";
 import ProductForm from "@/pages/components/ProductForm";
+import { Admin } from '@/model/Admin'
 
 const adminEmails = ["omwegaedmond@gmail.com"]
 
